@@ -13,4 +13,9 @@ public class UserController {
         return "hello";
     }
 
+    @GetMapping("/user")
+    public String isUser() {
+        return "You are a user";
+    }
+
 }
