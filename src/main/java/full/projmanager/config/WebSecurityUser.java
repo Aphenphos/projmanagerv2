@@ -1,6 +1,7 @@
 package full.projmanager.config;
 
 import full.projmanager.entities.User;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,13 +9,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WebSecurityUser  implements UserDetails {
+@AllArgsConstructor
+public class WebSecurityUser implements UserDetails {
 
     private final User user;
-
-    public WebSecurityUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
