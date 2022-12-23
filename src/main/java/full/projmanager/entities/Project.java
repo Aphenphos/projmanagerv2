@@ -6,16 +6,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import java.util.Set;
 @Getter
 @Setter
-@Document(collection = "users")
-public class User {
-
+@Document(collection = "projects")
+public class Project {
     @Id
     private String id;
-    @Indexed(unique = true)
-    private String username;
-    private String password;
-    private String authorities;
+
+    private String name;
+    private String owner;
 }
