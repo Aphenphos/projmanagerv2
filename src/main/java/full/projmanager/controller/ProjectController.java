@@ -21,9 +21,9 @@ public class ProjectController {
 
     @GetMapping("/getProjects")
     public List<Project> getProjects() throws AuthenticationException {
-        var u = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (u != null) {
-            return new ArrayList<Project>(projectRepository.findByOwner(u));
+        var uName = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (uName != null) {
+            return new ArrayList<Project>(projectRepository.findByOwner(uName));
         }
         throw new AuthenticationException("Failed to get Username");
     }
@@ -33,5 +33,17 @@ public class ProjectController {
         var uName = SecurityContextHolder.getContext().getAuthentication().getName();
         projectService.saveProject(projectRequest, uName);
             return projectRequest;
+    }
+
+    @DeleteMapping("/rmProject")
+    public void rmProject(@RequestParam(value = "id") String id) throws Exception {
+        var uName = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(id);
+        System.out.println(uName);
+        if (uName != null ) {
+            projectService.removeProject(uName, id);
+        } else {
+            throw new Exception("Failed to authenticate.");
+        }
     }
 }
