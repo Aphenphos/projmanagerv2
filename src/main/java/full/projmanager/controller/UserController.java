@@ -31,7 +31,6 @@ public class UserController {
 
     @PostMapping("/signup")
     public NewUserRequest signup(@RequestBody NewUserRequest newUserRequest) throws Exception {
-        System.out.println(newUserRequest);
        userService.saveUser(newUserRequest);
        return newUserRequest;
     }
