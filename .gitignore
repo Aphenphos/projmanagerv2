@@ -34,5 +34,5 @@ build/
 .vscode/
 
 ### Front End ###
-!node_modules
+node_modules
 
