@@ -14,19 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private UserService userService;
-    @GetMapping("/")
-    public String hello() {
-        return "hello";
-    }
 
-    @GetMapping("/user")
-    public Object isUser() {
-        var u = SecurityContextHolder.getContext().getAuthentication();
-        Object curUsername = u.getPrincipal();
-        System.out.println(curUsername);
-        u.getAuthorities().forEach(a -> System.out.println(a));
-
-        return curUsername;
+    @GetMapping("/curUser")
+    public String isUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     @PostMapping("/signup")

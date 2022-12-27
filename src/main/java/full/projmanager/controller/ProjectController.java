@@ -4,7 +4,8 @@ import com.mongodb.MongoException;
 import full.projmanager.entities.Project;
 import full.projmanager.repositories.ProjectRepository;
 import full.projmanager.services.ProjectService;
-import full.projmanager.types.ProjectRequest;
+import full.projmanager.types.NewProjectRequest;
+import full.projmanager.types.UpdateProjectRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -29,21 +30,29 @@ public class ProjectController {
     }
 
     @PostMapping("/newProject")
-    public ProjectRequest newProject(@RequestBody ProjectRequest projectRequest) throws MongoException{
+    public NewProjectRequest newProject(@RequestBody NewProjectRequest newProjectRequest) throws MongoException{
         var uName = SecurityContextHolder.getContext().getAuthentication().getName();
-        projectService.saveProject(projectRequest, uName);
-            return projectRequest;
+        projectService.saveProject(newProjectRequest, uName);
+            return newProjectRequest;
     }
 
     @DeleteMapping("/rmProject")
     public void rmProject(@RequestParam(value = "id") String id) throws Exception {
         var uName = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(id);
-        System.out.println(uName);
         if (uName != null ) {
             projectService.removeProject(uName, id);
         } else {
             throw new Exception("Failed to authenticate.");
+        }
+    }
+
+    @PutMapping("/updateProject")
+    public void upProject(@RequestParam(value = "id") String id, @RequestBody UpdateProjectRequest changes) throws Exception {
+        var uName = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (uName != null) {
+            projectService.updateProject(uName, id, changes);
+        } else {
+            throw new Exception("Failed to authenticate");
         }
     }
 }

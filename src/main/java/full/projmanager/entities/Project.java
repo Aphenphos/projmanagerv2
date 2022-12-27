@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.util.List;
+
 @Getter
 @Setter
 @Document(collection = "projects")
@@ -15,5 +18,7 @@ public class Project {
     private String id;
 
     private String name;
+    private String description;
+    private List<String> notes;
     private String owner;
 }
