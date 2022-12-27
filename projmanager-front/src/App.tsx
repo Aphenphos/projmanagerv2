@@ -4,6 +4,7 @@ import logo from "./logo.svg";
 import styles from "./App.module.css";
 import { Route, Routes } from "@solidjs/router";
 import SignIn from "./pages/SignIn/SignIn";
+import Projects from "./pages/Projects/Projects";
 
 const App: Component = () => {
   return (
@@ -11,6 +12,7 @@ const App: Component = () => {
       Testing
       <Routes>
         <Route path="/signin" component={SignIn} />
+        <Route path="/projects" component={Projects} />
       </Routes>
     </div>
   );

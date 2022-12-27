@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WebSecurityUser  implements UserDetails {
+public class WebSecurityUser implements UserDetails {
 
     private final User user;
 

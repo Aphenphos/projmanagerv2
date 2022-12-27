@@ -32,20 +32,20 @@ public class UserController {
 
     @PostMapping("/signup")
     public NewUserRequest signup(@RequestBody NewUserRequest newUserRequest) throws Exception {
-       userService.saveUser(newUserRequest);
-       return newUserRequest;
+        userService.saveUser(newUserRequest);
+        return newUserRequest;
     }
 
     @PostMapping("/signin")
     public ResponseEntity<HttpStatus> signin(@RequestBody User user) throws Exception {
-
-        Authentication authentication = null;
         try {
+            Authentication authentication =
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (BadCredentialsException e) {
             throw new Exception("Invalid login");
         }
+        System.out.println("Successful");
         return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }
 

@@ -1,11 +1,13 @@
 import { Component, createSignal } from "solid-js";
+import { signInUser } from "../../services/auth";
 
 const SignIn: Component = () => {
-  const [username, setUsername] = createSignal();
-  const [password, setPassword] = createSignal();
+  const [username, setUsername] = createSignal("");
+  const [password, setPassword] = createSignal("");
 
   function signIn(e: Event) {
     e.preventDefault();
+    signInUser(username(), password());
   }
   return (
     <div>
